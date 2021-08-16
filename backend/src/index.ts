@@ -1,7 +1,27 @@
 import express from 'express'
+import { EntityManager, MikroORM, RequestContext } from '@mikro-orm/core'
+
 const app = express()
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+export const DI = {} as {
+    orm: MikroORM,
+    em: EntityManager
+}
 
-app.listen(3000)
+async function bootstrap() {
+
+    DI.orm = await MikroORM.init({
+        entities: ['./src/entities/*.entity.ts']
+    })
+
+    DI.em = DI.orm.em
+
+    app.use(express.json())
+    app.use(express.urlencoded({ extended: true }))
+    app.use((req, res, next) => RequestContext.create(DI.orm.em, next))
+
+    app.listen(3000)
+
+}
+
+bootstrap()
