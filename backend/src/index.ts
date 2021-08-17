@@ -1,5 +1,7 @@
+import 'reflect-metadata'
 import express from 'express'
 import { EntityManager, MikroORM, RequestContext } from '@mikro-orm/core'
+import options from '../mikro-orm.config'
 
 const app = express()
 
@@ -10,9 +12,7 @@ export const DI = {} as {
 
 async function bootstrap() {
 
-    DI.orm = await MikroORM.init({
-        entities: ['./src/entities/*.entity.ts']
-    })
+    DI.orm = await MikroORM.init(options)
 
     DI.em = DI.orm.em
 
