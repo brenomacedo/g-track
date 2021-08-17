@@ -1,13 +1,15 @@
 import 'reflect-metadata'
 import express from 'express'
-import { EntityManager, MikroORM, RequestContext } from '@mikro-orm/core'
+import { EntityManager, EntityRepository, MikroORM, RequestContext } from '@mikro-orm/core'
 import options from '../mikro-orm.config'
+import { Music } from './entities/music.entity'
 
 const app = express()
 
 export const DI = {} as {
     orm: MikroORM,
-    em: EntityManager
+    em: EntityManager,
+    musicRepository: EntityRepository<Music>
 }
 
 async function bootstrap() {

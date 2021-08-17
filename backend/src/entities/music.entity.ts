@@ -14,6 +14,9 @@ export class Music {
     @Property()
     url: string
 
+    @Property()
+    image: string
+
     @ManyToOne(() => Author)
     author: Author
 
