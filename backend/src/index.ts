@@ -25,10 +25,10 @@ async function bootstrap() {
     app.use((req, res, next) => RequestContext.create(DI.orm.em, next))
     app.use(router)
 
-    app.listen(3000)
+    return { app, DI }
 
 }
 
 bootstrap()
 
-export default app
+export default bootstrap
