@@ -1,8 +1,16 @@
 import React, { FC } from 'react'
+import Bar from '../components/Bar'
+import styled from 'styled-components'
+
+const Container = styled.div`
+    min-height: 100vh;
+`
 
 const Home: FC = () => {
     return (
-        <div></div>
+        <Container>
+            <Bar />
+        </Container>
     )
 }
 

@@ -54,7 +54,10 @@
                 {
                   "html": "./src/index.html",
                   "js": "./src/renderer.ts",
-                  "name": "main_window"
+                  "name": "main_window",
+                  "preload": {
+                    "js": "./src/utils/preload.js"
+                  }
                 }
               ]
             }
@@ -109,6 +112,7 @@
     "electron-squirrel-startup": "^1.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.2.0",
     "react-lottie": "^1.2.3",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.3.0"
