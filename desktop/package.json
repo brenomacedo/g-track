@@ -20,7 +20,9 @@
   "license": "MIT",
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
@@ -36,7 +38,8 @@
         },
         {
           "name": "@electron-forge/maker-deb",
-          "config": {}
+          "config": {
+          }
         },
         {
           "name": "@electron-forge/maker-rpm",
