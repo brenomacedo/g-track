@@ -16,7 +16,7 @@ const Contaienr = styled.div`
     .logo {
         width: 12rem;
         height: 12rem;
-        background-image: url('/images/logo.png');
+        background-image: url('static://images/logo.png');
         background-size: contain;
     }
 `
