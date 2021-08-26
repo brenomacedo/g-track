@@ -1,4 +1,4 @@
-import React, { FC , useState } from 'react'
+import React, { FC } from 'react'
 import styled from 'styled-components'
 import { FiSquare, FiX, FiMinus } from 'react-icons/fi'
 
@@ -65,15 +65,12 @@ const Options = styled.div`
 
 const Bar: FC = () => {
 
-    const [fullscreen, setFullscreen] = useState(false)
-
     const minimize = () => {
         window.api.send('minimize')
     }
 
     const resize = () => {
-        window.api.send('resize', { fullscreen })
-        setFullscreen(!fullscreen)
+        window.api.send('resize')
     }
 
     const close = () => {

@@ -37,11 +37,11 @@ const createWindow = (): void => {
       mainWindow.minimize()
   })
 
-  ipcMain.on('resize', (e, { fullscreen }: { fullscreen: boolean }) => {
-    if(fullscreen) {
-        mainWindow.maximize()
-    } else {
+  ipcMain.on('resize', () => {
+    if(mainWindow.isMaximized()) {
         mainWindow.unmaximize()
+    } else {
+        mainWindow.maximize()
     }
   })
 
