@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import Bar from '../components/Bar'
 import SideBar from '../components/Sidebar'
 import BackFoward from '../components/BackForward'
+import Music from '../components/Music'
 import styled from 'styled-components'
 import { FiSearch } from 'react-icons/fi'
 
@@ -14,6 +15,7 @@ const Container = styled.div`
     .home {
         display: flex;
         flex: 1;
+        gap: 20px;
     }
 
     .home-content {
@@ -64,6 +66,7 @@ const Container = styled.div`
 
     .musics-grid {
         display: flex;
+        margin-top: 30px;
     }
 `
 
@@ -84,7 +87,7 @@ const Home: FC = () => {
                     <div className="musics">
                         <h3>Registered songs</h3>
                         <div className="musics-grid">
-
+                            <Music />
                         </div>
                     </div>
                 </div>
