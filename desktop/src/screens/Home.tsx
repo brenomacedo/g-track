@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { FiSearch } from 'react-icons/fi'
 
 const Container = styled.div`
-    min-height: 100vh;
+    height: 100vh;
 
     display: flex;
     flex-direction: column;
@@ -16,12 +16,15 @@ const Container = styled.div`
         display: flex;
         flex: 1;
         gap: 20px;
+        overflow: hidden;
     }
 
     .home-content {
         flex: 1;
         display: flex;
         flex-direction: column;
+        height: inherit;
+        overflow: auto;
     }
 
     .top-bar {
@@ -66,7 +69,9 @@ const Container = styled.div`
 
     .musics-grid {
         display: flex;
+        flex-wrap: wrap;
         margin-top: 30px;
+        gap: 20px;
     }
 `
 
@@ -87,6 +92,11 @@ const Home: FC = () => {
                     <div className="musics">
                         <h3>Registered songs</h3>
                         <div className="musics-grid">
+                            <Music />
+                            <Music />
+                            <Music />
+                            <Music />
+                            <Music />
                             <Music />
                         </div>
                     </div>

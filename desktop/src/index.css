@@ -26,6 +26,22 @@ body {
     font-weight: bold;
 }
 
+::-webkit-scrollbar {
+    width: 0.4rem;
+    height: 0.4rem;
+}
+::-webkit-scrollbar-track {
+    background: #222;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0e4eff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: blue;
+}
+
 @media (max-width: 1280px) {
     html {
         font-size: 93.75%;
