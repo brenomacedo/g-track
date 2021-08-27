@@ -98,6 +98,10 @@ const Home: FC = () => {
                             <Music />
                             <Music />
                             <Music />
+                            <Music />
+                            <Music />
+                            <Music />
+                            <Music />
                         </div>
                     </div>
                 </div>
