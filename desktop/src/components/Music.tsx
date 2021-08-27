@@ -25,6 +25,8 @@ const Container = styled.div`
     }
 
     .pic {
+        background-position: center;
+        background-size: cover;
         background-image: url('http://localhost:3333/files/images/sh-4.jpg');
         padding-bottom: 100%;
         border-radius: 15px;

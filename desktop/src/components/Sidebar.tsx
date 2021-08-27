@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
 type SideBarProps = {
@@ -53,11 +54,24 @@ const Container = styled.div`
 `
 
 const SideBar: FC<SideBarProps> = ({ selected }) => {
+
+    const { push } = useHistory()
+
+    const goToQueue = () => {
+        push('queue')
+    }
+
+    const goToHome = () => {
+        push('home')
+    }
+
     return (
         <Container>
             <div className='options'>
-                <div className={`option ${selected === 'home' && 'selected'}`}>Início</div>
-                <div className={`option ${selected === 'queue' && 'selected'}`}>Fila</div>
+                <div onClick={goToHome}
+                    className={`option ${selected === 'home' && 'selected'}`}>Início</div>
+                <div onClick={goToQueue}
+                    className={`option ${selected === 'queue' && 'selected'}`}>Fila</div>
             </div>
             <div className="playing">
                 <p>Playing now</p>
