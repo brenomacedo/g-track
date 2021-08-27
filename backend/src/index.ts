@@ -4,6 +4,7 @@ import { EntityManager, EntityRepository, MikroORM, RequestContext } from '@mikr
 import options from '../mikro-orm.config'
 import { Music } from './entities/music.entity'
 import router from './routes'
+import path from 'path'
 
 const app = express()
 
@@ -24,6 +25,7 @@ async function bootstrap() {
     app.use(express.urlencoded({ extended: true }))
     app.use((req, res, next) => RequestContext.create(DI.orm.em, next))
     app.use(router)
+    app.use('/files' ,express.static(path.resolve(__dirname, 'static')))
 
     return { app, DI }
 

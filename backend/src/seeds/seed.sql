@@ -13,6 +13,6 @@ INSERT INTO music(name, url, image, author_id, game_id) VALUES ('Amusement Park'
 INSERT INTO music(name, url, image, author_id, game_id) VALUES ('Gael Theme', 'gael-theme', 'dark-souls-3', 3, 3);
 INSERT INTO music(name, url, image, author_id, game_id) VALUES ('Prologue', 'prologue', 'dark-souls-3', 3, 3);
 INSERT INTO music(name, url, image, author_id, game_id) VALUES ('Sister Freide', 'sister-freide', 'dark-souls-3', 3, 3);
-INSERT INTO music(name, url, image, author_id, game_id) VALUES ('The Weight of the World', 'the-weight-of-the-world', 'sh-homecoming', 2, 2);
+INSERT INTO music(name, url, image, author_id, game_id) VALUES ('The Weight of the World', 'the-weight-of-the-world', 'nier-automata', 2, 2);
 INSERT INTO music(name, url, image, author_id, game_id) VALUES ('Promise', 'promise', 'sh-2', 1, 1);
 INSERT INTO music(name, url, image, author_id, game_id) VALUES ('Waiting For You', 'waiting-for-you', 'sh-4', 1, 1);
