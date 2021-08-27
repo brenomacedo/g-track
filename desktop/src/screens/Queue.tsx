@@ -12,6 +12,7 @@ const Container = styled.div`
     flex-direction: column;
 
     .queue {
+        overflow: hidden;
         display: flex;
         flex: 1;
         gap: 20px;
@@ -67,6 +68,11 @@ const Queue: FC = () => {
                     </div>
                     <div className="playing-now">
                         <h3>Next in queue</h3>
+                        <QueueMusic />
+                        <QueueMusic />
+                        <QueueMusic />
+                        <QueueMusic />
+                        <QueueMusic />
                         <QueueMusic />
                         <QueueMusic />
                         <QueueMusic />
