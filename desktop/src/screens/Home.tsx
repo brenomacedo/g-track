@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
 import Bar from '../components/Bar'
 import SideBar from '../components/Sidebar'
+import BackFoward from '../components/BackForward'
 import styled from 'styled-components'
-import { FiSearch, FiArrowLeft, FiArrowRight } from 'react-icons/fi'
+import { FiSearch } from 'react-icons/fi'
 
 const Container = styled.div`
     min-height: 100vh;
@@ -52,19 +53,17 @@ const Container = styled.div`
         padding-left: 45px;
     }
 
-    .back-forward {
-        display: flex;
-        gap: 1rem;
+    .musics {
+        padding: 1rem;
     }
 
-    .arrow {
-        font-size: 2rem;
-        color: #ccc;
-        cursor: pointer;
-    }
-
-    .arrow:hover {
+    .musics h3 {
+        font-family: 'OpenSans';
         color: white;
+    }
+
+    .musics-grid {
+        display: flex;
     }
 `
 
@@ -76,13 +75,16 @@ const Home: FC = () => {
                 <SideBar selected='home' />
                 <div className="home-content">
                     <div className="top-bar">
-                        <div className="back-forward">
-                            <FiArrowLeft className='arrow' />
-                            <FiArrowRight className='arrow' />
-                        </div>
+                        <BackFoward />
                         <div className="search">
                             <input type="text" className="search-input" placeholder='Search a music' />
                             <FiSearch className='search-icon' />
+                        </div>
+                    </div>
+                    <div className="musics">
+                        <h3>Registered songs</h3>
+                        <div className="musics-grid">
+
                         </div>
                     </div>
                 </div>
