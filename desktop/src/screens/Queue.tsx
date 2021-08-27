@@ -41,7 +41,6 @@ const Container = styled.div`
         margin-top: 4rem;
         display: flex;
         flex-direction: column;
-        gap: 1rem;
         padding-right: 6rem;
     }
 
@@ -64,6 +63,12 @@ const Queue: FC = () => {
                     </div>
                     <div className="playing-now">
                         <h3>Playing now</h3>
+                        <QueueMusic />
+                    </div>
+                    <div className="playing-now">
+                        <h3>Next in queue</h3>
+                        <QueueMusic />
+                        <QueueMusic />
                         <QueueMusic />
                     </div>
                 </div>

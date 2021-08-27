@@ -12,6 +12,10 @@ const Container = styled.div`
         background-color: #292929;
     }
 
+    :nth-of-type(1) {
+        margin-top: 1rem;
+    }
+
     .music-info {
         display: flex;
         gap: 2rem;
