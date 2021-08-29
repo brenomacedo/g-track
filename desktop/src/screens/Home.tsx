@@ -73,6 +73,35 @@ const Container = styled.div`
         margin-top: 30px;
         gap: 20px;
     }
+
+    .player {
+        border-top: 1px solid #323232;
+        background-color: #1f1f1f;
+        height: 5.5rem;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 1rem;
+    }
+
+    .playing-now {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .playing-now h3 {
+        color: white;
+        font-family: 'OpenSans';
+        font-size: 0.8rem;
+    }
+
+    .playing-now p {
+        color: #ccc;
+        font-family: 'OpenSans';
+        font-size: 0.7rem;
+    }
 `
 
 const Home: FC = () => {
@@ -105,6 +134,13 @@ const Home: FC = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="player">
+                <div className="playing-now">
+                    <h3>Promise</h3>
+                    <p>Akira Yamaoka</p>
+                </div>
+                <div className="player"></div>
             </div>
         </Container>
     )
