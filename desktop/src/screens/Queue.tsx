@@ -4,12 +4,14 @@ import SideBar from '../components/Sidebar'
 import styled from 'styled-components'
 import BackFoward from '../components/BackForward'
 import QueueMusic from '../components/QueueMusic'
+import Player from '../components/Player'
 
 const Container = styled.div`
     height: 100vh;
 
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
     .queue {
         overflow: hidden;
@@ -79,6 +81,7 @@ const Queue: FC = () => {
                     </div>
                 </div>
             </div>
+            <Player />
         </Container>
     )
 }

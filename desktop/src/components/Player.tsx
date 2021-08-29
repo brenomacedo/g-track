@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 import ReactSlider from 'react-slider'
-import { FiShuffle, FiRepeat } from 'react-icons/fi'
+import { FiShuffle, FiRepeat, FiVolume2 } from 'react-icons/fi'
 import { FaStepForward, FaStepBackward, FaPlay } from 'react-icons/fa'
 
 const Container = styled.div`
@@ -16,18 +16,19 @@ const Container = styled.div`
     padding: 1rem;
 
 
-    .playing-now {
+    .current-music {
         display: flex;
         flex-direction: column;
+
     }
 
-    .playing-now h3 {
+    .current-music h3 {
         color: white;
         font-family: 'OpenSans';
         font-size: 0.8rem;
     }
 
-    .playing-now p {
+    .current-music p {
         color: #ccc;
         font-family: 'OpenSans';
         font-size: 0.7rem;
@@ -89,6 +90,17 @@ const Container = styled.div`
         color: black;
         font-size: 0.8rem;
     }
+
+    .audio {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .microphone {
+        color: white;
+        font-size: 1.3rem;
+    }
 `
 
 const PlayerSlider = styled(ReactSlider)`
@@ -127,10 +139,17 @@ const PlayerSlider = styled(ReactSlider)`
     }
 `
 
+const AudioSlider = styled(PlayerSlider)`
+    min-width: 100px;
+    max-width: 120px;
+    width: 80%;
+    height: 5px;
+`
+
 const Player: FC = () => {
     return (
         <Container>
-            <div className="playing-now">
+            <div className="current-music">
                 <h3>Promise</h3>
                 <p>Akira Yamaoka</p>
             </div>
@@ -158,7 +177,10 @@ const Player: FC = () => {
                     <p>2:45</p>
                 </div>
             </div>
-            <div></div>
+            <div className="audio">
+                <FiVolume2 className='microphone' />
+                <AudioSlider />
+            </div>
         </Container>
     )
 }
