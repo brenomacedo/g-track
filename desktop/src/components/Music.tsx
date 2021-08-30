@@ -1,6 +1,6 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import styled from 'styled-components'
-import { FiPlay } from 'react-icons/fi'
+import { FiPlay, FiX } from 'react-icons/fi'
 
 type Author = {
     id: number
@@ -25,7 +25,7 @@ type MusicProps = {
     music: Music
 }
 
-const Container = styled.div<{ background: string }>`
+const Container = styled.div<{ background: string, open: boolean }>`
     width: 14rem;
     height: 19rem;
     background-color: #1f1f1f;
@@ -33,6 +33,7 @@ const Container = styled.div<{ background: string }>`
     padding: 1rem;
     cursor: pointer;
     transition: background-color 0.5s;
+    position: relative;
 
     display: flex;
     flex-direction: column;
@@ -94,11 +95,94 @@ const Container = styled.div<{ background: string }>`
         margin-top: 10px;
         font-size: 0.9rem;
     }
+
+    .menu {
+        width: 14rem;
+        height: ${props => props.open ? '19' : '0'}rem;
+        position: absolute;
+
+        overflow: hidden;
+        transition: height 0.3s;
+
+        left: 0;
+        top: 0;
+
+        background-color: #1f1f1f;
+        border-radius: 3px;
+
+        z-index: 1;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        cursor: initial;
+    }
+
+    .menu-option {
+        color: white;
+        font-family: 'OpenSans';
+        font-size: 1.1rem;
+        text-align: center;
+        padding: 0.5rem 0;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 14rem;
+    }
+
+    .menu-option:hover {
+        background-color: #272727;
+    }
+
+    .close-button {
+        width: 2.5rem;
+        height: 2.5rem;
+        background-color: #ff3434;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50px;
+
+        margin-bottom: 30px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .close-button:hover {
+        background-color: red;
+    }
+
+    .close-icon {
+        color: white;
+        font-size: 1rem;
+    }
 `
 
 const Music: FC<MusicProps> = ({ music }) => {
+
+    const [showMenu, setShowMenu] = useState(false)
+
+    const openMenu = () => {
+        if(showMenu) return
+        setShowMenu(true)
+    }
+
+    const closeMenu = () => {
+        setShowMenu(false)
+    }
+
     return (
-        <Container background={music.image}>
+        <Container background={music.image} open={showMenu} onClick={openMenu}>
+            <div className="menu">
+                <div className="menu-options">
+                    <div className="menu-option">Play now</div>
+                    <div className="menu-option">Add to queue</div>
+                </div>
+                <div className="close-button" onClick={closeMenu}>
+                    <FiX className='close-icon' />
+                </div>
+            </div>
             <div className="pic">
                 <div className='play'>
                     <FiPlay className='play-icon' />
