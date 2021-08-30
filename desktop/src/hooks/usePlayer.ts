@@ -24,6 +24,7 @@ type PlayerContextProps = {
     musics: Music[]
     playing: Music
     selectMusic: (music: Music) => void
+    search: (search: string) => void
 }
 
 const usePlayer = (): PlayerContextProps => {

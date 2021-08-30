@@ -2,7 +2,30 @@ import React, { FC } from 'react'
 import styled from 'styled-components'
 import { FiPlay } from 'react-icons/fi'
 
-const Container = styled.div`
+type Author = {
+    id: number
+    name: string
+}
+
+type Game = {
+    id: number
+    name: string
+}
+
+type Music = {
+    id: number
+    name: string
+    url: string
+    image: string
+    author: Author
+    game: Game
+}
+
+type MusicProps = {
+    music: Music
+}
+
+const Container = styled.div<{ background: string }>`
     width: 14rem;
     height: 19rem;
     background-color: #1f1f1f;
@@ -27,7 +50,7 @@ const Container = styled.div`
     .pic {
         background-position: center;
         background-size: cover;
-        background-image: url('http://localhost:3333/files/images/sh-4.jpg');
+        background-image: url('http://localhost:3333/files/images/${props => props.background}.jpg');
         padding-bottom: 100%;
         border-radius: 15px;
         -webkit-box-shadow: 1px 2px 15px 0px #000000;
@@ -64,23 +87,25 @@ const Container = styled.div`
     p {
         color: #ccc;
         font-family: 'OpenSans';
+        font-size: 0.8rem;
     }
 
     h3 {
         margin-top: 10px;
+        font-size: 0.9rem;
     }
 `
 
-const Music: FC = () => {
+const Music: FC<MusicProps> = ({ music }) => {
     return (
-        <Container>
+        <Container background={music.image}>
             <div className="pic">
                 <div className='play'>
                     <FiPlay className='play-icon' />
                 </div>
             </div>
-            <h3>Room of Angel</h3>
-            <p>Akira Yamaoka</p>
+            <h3>{music.name}</h3>
+            <p>{music.author.name}</p>
         </Container>
     )
 }

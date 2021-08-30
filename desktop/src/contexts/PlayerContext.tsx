@@ -24,6 +24,7 @@ type PlayerContextProps = {
     musics: Music[]
     playing: Music
     selectMusic: (music: Music) => void
+    search: (search: string) => void
 }
 
 const PlayerContext = createContext<PlayerContextProps>({} as never)
@@ -43,9 +44,15 @@ const PlayerProvider: FC = ({ children }) => {
         setPlaying(music)
     }
 
+    const search = (search: string) => {
+        api.get<Music[]>('/musics', { params: { search } }).then(({ data }) => {
+            setMusics(data)
+        })
+    }
+
     return (
         <PlayerContext.Provider value={{
-            musics, playing, selectMusic
+            musics, playing, selectMusic, search
         }}>
             {children}
         </PlayerContext.Provider>

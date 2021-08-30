@@ -79,11 +79,11 @@ const Container = styled.div`
 
 const Home: FC = () => {
 
-    const { musics } = usePlayer()
+    const { musics, search } = usePlayer()
 
     const renderMusics = () => {
         return musics.map(music => {
-            return <Music />
+            return <Music music={music} />
         })
     }
 
@@ -96,7 +96,8 @@ const Home: FC = () => {
                     <div className="top-bar">
                         <BackFoward />
                         <div className="search">
-                            <input type="text" className="search-input" placeholder='Search a music' />
+                            <input type="text" className="search-input" placeholder='Search a music'
+                            onChange={e => search(e.target.value)} />
                             <FiSearch className='search-icon' />
                         </div>
                     </div>

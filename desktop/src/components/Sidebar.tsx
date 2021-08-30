@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { useHistory } from 'react-router-dom'
+import usePlayer from '../hooks/usePlayer'
 import styled from 'styled-components'
 
 type SideBarProps = {
@@ -51,9 +52,27 @@ const Container = styled.div`
         background-position: center;
         background-size: cover;
     }
+
+    .no-playing {
+        height: 15rem;
+        margin-top: 1rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        color: white;
+        font-size: 1rem;
+        font-family: 'OpenSans';
+        border-radius: 10px;
+
+        background-color: #5347ff;
+    }
 `
 
 const SideBar: FC<SideBarProps> = ({ selected }) => {
+
+    const { playing } = usePlayer()
 
     const { push } = useHistory()
 
@@ -75,7 +94,13 @@ const SideBar: FC<SideBarProps> = ({ selected }) => {
             </div>
             <div className="playing">
                 <p>Playing now</p>
-                <div className="playing-music"></div>
+                {playing ? (
+                    <div className="playing-music"></div>
+                ) : (
+                    <div className="no-playing">
+                        No music playing.
+                    </div>
+                )}
             </div>
         </Container>
     )
