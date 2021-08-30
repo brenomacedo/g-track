@@ -28,13 +28,13 @@ type PlayerContextProps = {
 
 const PlayerContext = createContext<PlayerContextProps>({} as never)
 
-const PlayerProvider: FC = () => {
+const PlayerProvider: FC = ({ children }) => {
 
-    const [musics, setMusics] = useState<Music[]>()
+    const [musics, setMusics] = useState<Music[]>([])
     const [playing, setPlaying] = useState<Music>()
 
     useEffect(() => {
-        api.get<Music[]>('/musics').then(({ data }) => {
+        api.get<Music[]>('/musics', { params: { search: '' } }).then(({ data }) => {
             setMusics(data)
         })
     }, [])
@@ -47,7 +47,7 @@ const PlayerProvider: FC = () => {
         <PlayerContext.Provider value={{
             musics, playing, selectMusic
         }}>
-
+            {children}
         </PlayerContext.Provider>
     )
 }

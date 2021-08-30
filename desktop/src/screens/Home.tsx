@@ -6,6 +6,7 @@ import Music from '../components/Music'
 import styled from 'styled-components'
 import { FiSearch } from 'react-icons/fi'
 import Player from '../components/Player'
+import usePlayer from '../hooks/usePlayer'
 
 const Container = styled.div`
     height: 100vh;
@@ -77,6 +78,15 @@ const Container = styled.div`
 `
 
 const Home: FC = () => {
+
+    const { musics } = usePlayer()
+
+    const renderMusics = () => {
+        return musics.map(music => {
+            return <Music />
+        })
+    }
+
     return (
         <Container>
             <Bar />
@@ -93,9 +103,7 @@ const Home: FC = () => {
                     <div className="musics">
                         <h3>Registered songs</h3>
                         <div className="musics-grid">
-                            <Music />
-                            <Music />
-                            <Music />
+                            {renderMusics()}
                         </div>
                     </div>
                 </div>
