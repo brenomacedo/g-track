@@ -163,28 +163,33 @@ const Player: FC = () => {
         setIsPlaying(true)
     }, [playing])
 
-    const setupListeners = () => {
-        setFormatedCurrentTime(formatTime(playerRef.current?.currentTime))
-        setFormatedDuration(formatTime(playerRef.current.duration))
+    useEffect(() => {
+        playerRef.current.addEventListener('loadedmetadata', () => {
+            setFormatedCurrentTime(formatTime(playerRef.current?.currentTime))
+            setFormatedDuration(formatTime(playerRef.current?.duration))
+        })
+
         playerRef.current.addEventListener('timeupdate', () => {
             setCurrentProgress(playerRef.current?.currentTime * 100 / playerRef.current?.duration)
             setFormatedCurrentTime(formatTime(playerRef.current?.currentTime))
         })
-    }
+    }, [])
 
     const togglePlay = () => {
         setIsPlaying(!isPlaying)
 
         if(isPlaying) {
-            playerRef.current.pause()
+            playerRef.current?.pause()
             return
         }
 
-        playerRef.current.play()
+        playerRef?.current.play()
     }
 
     const changeValue = (e: number) => {
-        playerRef.current.currentTime = playerRef.current.duration * e /100
+        if(playerRef.current.duration) {
+            playerRef.current.currentTime = playerRef.current?.duration * e /100
+        }
     }
 
     return (
@@ -221,7 +226,7 @@ const Player: FC = () => {
                         thumbClassName='thumb' trackClassName='track' min={0} max={100} />
                     <p>{formatedDuration}</p>
                 </div>
-                <audio onLoadedMetadata={setupListeners} autoPlay
+                <audio autoPlay
                     ref={playerRef} src={`http://localhost:3333/files/audios/${playing?.url}.mp3`} />
             </div>
             <div className="audio">

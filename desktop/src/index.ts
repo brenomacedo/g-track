@@ -27,7 +27,6 @@ const createWindow = (): void => {
     titleBarStyle: 'hidden',
     frame: false,
     webPreferences: {
-        nodeIntegration: true,
         preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY
     },
     resizable: true
