@@ -83,7 +83,7 @@ const Home: FC = () => {
 
     const renderMusics = () => {
         return musics.map(music => {
-            return <Music music={music} />
+            return <Music key={music.id} music={music} />
         })
     }
 

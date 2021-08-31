@@ -7,7 +7,7 @@ type SideBarProps = {
     selected: 'home' | 'queue'
 }
 
-const Container = styled.div`
+const Container = styled.div<{ background: string }>`
     width: 15rem;
     height: inherit;
 
@@ -48,7 +48,7 @@ const Container = styled.div`
         height: 15rem;
         margin-top: 1rem;
 
-        background-image: url('http://localhost:3333/files/images/sh-2.jpg');
+        background-image: url('http://localhost:3333/files/images/${props => props.background}.jpg');
         background-position: center;
         background-size: cover;
     }
@@ -85,7 +85,7 @@ const SideBar: FC<SideBarProps> = ({ selected }) => {
     }
 
     return (
-        <Container>
+        <Container background={playing?.image}>
             <div className='options'>
                 <div onClick={goToHome}
                     className={`option ${selected === 'home' && 'selected'}`}>Início</div>

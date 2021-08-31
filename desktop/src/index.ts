@@ -53,11 +53,15 @@ const createWindow = (): void => {
         }
   })
 
+  ipcMain.on('debug', (e, args) => {
+        console.log(args)
+  })
+
   mainWindow.once('ready-to-show', () => {
       mainWindow.show()
   })
 
-//   mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   // and load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);

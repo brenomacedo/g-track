@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react'
 import styled from 'styled-components'
 import { FiPlay, FiX } from 'react-icons/fi'
+import usePlayer from '../hooks/usePlayer'
 
 type Author = {
     id: number
@@ -161,6 +162,7 @@ const Container = styled.div<{ background: string, open: boolean }>`
 
 const Music: FC<MusicProps> = ({ music }) => {
 
+    const { addToQueue, playNow } = usePlayer()
     const [showMenu, setShowMenu] = useState(false)
 
     const openMenu = () => {
@@ -172,12 +174,22 @@ const Music: FC<MusicProps> = ({ music }) => {
         setShowMenu(false)
     }
 
+    const handlePlayNow = () => {
+        playNow(music)
+        closeMenu()
+    }
+
+    const handleAddToQueue = () => {
+        addToQueue(music)
+        closeMenu()
+    }
+
     return (
         <Container background={music.image} open={showMenu} onClick={openMenu}>
             <div className="menu">
                 <div className="menu-options">
-                    <div className="menu-option">Play now</div>
-                    <div className="menu-option">Add to queue</div>
+                    <div className="menu-option" onClick={handlePlayNow}>Play now</div>
+                    <div className="menu-option" onClick={handleAddToQueue}>Add to queue</div>
                 </div>
                 <div className="close-button" onClick={closeMenu}>
                     <FiX className='close-icon' />

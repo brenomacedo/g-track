@@ -2,7 +2,7 @@ import { contextBridge, ipcRenderer } from 'electron'
 
 contextBridge.exposeInMainWorld('api', {
     send: (channel, data) => {
-        let validChannels = ['minimize', 'resize', 'close']
+        let validChannels = ['minimize', 'resize', 'close', 'debug']
         if(validChannels.includes(channel)) {
             ipcRenderer.send(channel, data)
         }

@@ -1,8 +1,10 @@
-import React, { FC } from 'react'
+import React, { FC , useRef, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import ReactSlider from 'react-slider'
 import { FiShuffle, FiRepeat, FiVolume2 } from 'react-icons/fi'
-import { FaStepForward, FaStepBackward, FaPlay } from 'react-icons/fa'
+import { FaStepForward, FaStepBackward, FaPlay, FaPause } from 'react-icons/fa'
+import usePlayer from '../hooks/usePlayer'
+import formatTime from '../functions/formatTime'
 
 const Container = styled.div`
     border-top: 1px solid #323232;
@@ -147,6 +149,44 @@ const AudioSlider = styled(PlayerSlider)`
 `
 
 const Player: FC = () => {
+
+    const { playing } = usePlayer()
+
+    const [isPlaying, setIsPlaying] = useState(true)
+    const [currentProgress, setCurrentProgress] = useState(0)
+    const [formatedCurrentTime, setFormatedCurrentTime] = useState('0:00')
+    const [formatedDuration, setFormatedDuration] = useState('0:00')
+
+    const playerRef = useRef<HTMLAudioElement>(null)
+
+    useEffect(() => {
+        setIsPlaying(true)
+    }, [playing])
+
+    const setupListeners = () => {
+        setFormatedCurrentTime(formatTime(playerRef.current?.currentTime))
+        setFormatedDuration(formatTime(playerRef.current.duration))
+        playerRef.current.addEventListener('timeupdate', () => {
+            setCurrentProgress(playerRef.current?.currentTime * 100 / playerRef.current?.duration)
+            setFormatedCurrentTime(formatTime(playerRef.current?.currentTime))
+        })
+    }
+
+    const togglePlay = () => {
+        setIsPlaying(!isPlaying)
+
+        if(isPlaying) {
+            playerRef.current.pause()
+            return
+        }
+
+        playerRef.current.play()
+    }
+
+    const changeValue = (e: number) => {
+        playerRef.current.currentTime = playerRef.current.duration * e /100
+    }
+
     return (
         <Container>
             <div className="current-music">
@@ -161,8 +201,12 @@ const Player: FC = () => {
                     <div className="option-2">
                         <FaStepBackward />
                     </div>
-                    <div className="pause">
-                        <FaPlay />
+                    <div className="pause" onClick={togglePlay}>
+                        {isPlaying ? (
+                            <FaPause />
+                        ) : (
+                            <FaPlay />
+                        )}
                     </div>
                     <div className="option-2">
                         <FaStepForward />
@@ -172,10 +216,13 @@ const Player: FC = () => {
                     </div>
                 </div>
                 <div className="player-track">
-                    <p>2:20</p>
-                    <PlayerSlider thumbClassName='thumb' trackClassName='track' />
-                    <p>2:45</p>
+                    <p>{formatedCurrentTime}</p>
+                    <PlayerSlider value={currentProgress} onChange={changeValue}
+                        thumbClassName='thumb' trackClassName='track' min={0} max={100} />
+                    <p>{formatedDuration}</p>
                 </div>
+                <audio onLoadedMetadata={setupListeners} autoPlay
+                    ref={playerRef} src={`http://localhost:3333/files/audios/${playing?.url}.mp3`} />
             </div>
             <div className="audio">
                 <FiVolume2 className='microphone' />
