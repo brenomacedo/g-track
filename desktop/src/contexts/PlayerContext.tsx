@@ -22,6 +22,7 @@ type Music = {
 
 type PlayerContextProps = {
     musics: Music[]
+    queue: Music[]
     playing: Music
     selectMusic: (music: Music) => void
     search: (search: string) => void
@@ -85,7 +86,7 @@ const PlayerProvider: FC = ({ children }) => {
 
     return (
         <PlayerContext.Provider value={{
-            musics, playing, selectMusic, search, addToQueue, playNow, removeCurrentMusic
+            musics, playing, selectMusic, search, addToQueue, playNow, removeCurrentMusic, queue
         }}>
             {children}
         </PlayerContext.Provider>

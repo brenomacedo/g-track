@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import usePlayer from '../hooks/usePlayer'
 import styled from 'styled-components'
 import QueueMusic from '../components/QueueMusic'
 
@@ -35,9 +36,29 @@ const Container = styled.div`
         color: #ccc;
         font-family: 'OpenSans';
     }
+
+    .no-music-playing {
+        display: flex;
+        align-items: center;
+        height: 4rem;
+        color: white;
+        font-family: 'OpenSans';
+    }
 `
 
 const Queue: FC = () => {
+
+    const { playing, queue } = usePlayer()
+
+    const renderQueue = () => {
+        if(queue.length === 0) {
+            return <div className='no-music-playing'>No musics in queue</div>
+        }
+        return queue.map(music => {
+            return <QueueMusic />
+        })
+    }
+
     return (
         <Container>
             <div className="top-bar">
@@ -45,18 +66,15 @@ const Queue: FC = () => {
             </div>
             <div className="playing-now">
                 <h3>Playing now</h3>
-                <QueueMusic />
+                {playing ? (
+                    <QueueMusic />
+                ) : (
+                    <div className='no-music-playing'>No music playing</div>
+                )}
             </div>
             <div className="playing-now">
                 <h3>Next in queue</h3>
-                <QueueMusic />
-                <QueueMusic />
-                <QueueMusic />
-                <QueueMusic />
-                <QueueMusic />
-                <QueueMusic />
-                <QueueMusic />
-                <QueueMusic />
+                {renderQueue()}
             </div>
         </Container>
     )
