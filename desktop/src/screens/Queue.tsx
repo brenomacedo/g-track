@@ -1,32 +1,16 @@
 import React, { FC } from 'react'
-import Bar from '../components/Bar'
-import SideBar from '../components/Sidebar'
 import styled from 'styled-components'
-import BackFoward from '../components/BackForward'
 import QueueMusic from '../components/QueueMusic'
-import Player from '../components/Player'
 
 const Container = styled.div`
-    height: 100vh;
 
+
+    flex: 1;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    height: inherit;
+    overflow: auto;
 
-    .queue {
-        overflow: hidden;
-        display: flex;
-        flex: 1;
-        gap: 20px;
-    }
-
-    .queue-content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        height: inherit;
-        overflow: auto;
-    }
 
     .top-bar {
         display: flex;
@@ -56,32 +40,24 @@ const Container = styled.div`
 const Queue: FC = () => {
     return (
         <Container>
-            <Bar />
-            <div className="queue">
-                <SideBar selected='queue' />
-                <div className="queue-content">
-                    <div className="top-bar">
-                        <BackFoward />
-                        <h2>Current queue</h2>
-                    </div>
-                    <div className="playing-now">
-                        <h3>Playing now</h3>
-                        <QueueMusic />
-                    </div>
-                    <div className="playing-now">
-                        <h3>Next in queue</h3>
-                        <QueueMusic />
-                        <QueueMusic />
-                        <QueueMusic />
-                        <QueueMusic />
-                        <QueueMusic />
-                        <QueueMusic />
-                        <QueueMusic />
-                        <QueueMusic />
-                    </div>
-                </div>
+            <div className="top-bar">
+                <h2>Current queue</h2>
             </div>
-            <Player />
+            <div className="playing-now">
+                <h3>Playing now</h3>
+                <QueueMusic />
+            </div>
+            <div className="playing-now">
+                <h3>Next in queue</h3>
+                <QueueMusic />
+                <QueueMusic />
+                <QueueMusic />
+                <QueueMusic />
+                <QueueMusic />
+                <QueueMusic />
+                <QueueMusic />
+                <QueueMusic />
+            </div>
         </Container>
     )
 }

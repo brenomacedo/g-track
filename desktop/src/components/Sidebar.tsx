@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
-import { useHistory } from 'react-router-dom'
 import usePlayer from '../hooks/usePlayer'
 import styled from 'styled-components'
 
 type SideBarProps = {
     selected: 'home' | 'queue'
+    navigate: (screen: 'home' | 'queue') => void
 }
 
 const Container = styled.div<{ background: string }>`
@@ -70,18 +70,16 @@ const Container = styled.div<{ background: string }>`
     }
 `
 
-const SideBar: FC<SideBarProps> = ({ selected }) => {
+const SideBar: FC<SideBarProps> = ({ selected, navigate }) => {
 
     const { playing } = usePlayer()
 
-    const { push } = useHistory()
-
     const goToQueue = () => {
-        push('queue')
+        navigate('queue')
     }
 
     const goToHome = () => {
-        push('home')
+        navigate('home')
     }
 
     return (

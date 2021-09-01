@@ -1,33 +1,16 @@
 import React, { FC } from 'react'
-import Bar from '../components/Bar'
-import SideBar from '../components/Sidebar'
-import BackFoward from '../components/BackForward'
 import Music from '../components/Music'
 import styled from 'styled-components'
 import { FiSearch } from 'react-icons/fi'
-import Player from '../components/Player'
 import usePlayer from '../hooks/usePlayer'
 
 const Container = styled.div`
-    height: 100vh;
 
+    flex: 1;
     display: flex;
     flex-direction: column;
-
-    .home {
-        display: flex;
-        flex: 1;
-        gap: 20px;
-        overflow: hidden;
-    }
-
-    .home-content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        height: inherit;
-        overflow: auto;
-    }
+    height: inherit;
+    overflow: auto;
 
     .top-bar {
         display: flex;
@@ -89,27 +72,19 @@ const Home: FC = () => {
 
     return (
         <Container>
-            <Bar />
-            <div className="home">
-                <SideBar selected='home' />
-                <div className="home-content">
-                    <div className="top-bar">
-                        <BackFoward />
-                        <div className="search">
-                            <input type="text" className="search-input" placeholder='Search a music'
-                            onChange={e => search(e.target.value)} />
-                            <FiSearch className='search-icon' />
-                        </div>
-                    </div>
-                    <div className="musics">
-                        <h3>Registered songs</h3>
-                        <div className="musics-grid">
-                            {renderMusics()}
-                        </div>
-                    </div>
+            <div className="top-bar">
+                <div className="search">
+                    <input type="text" className="search-input" placeholder='Search a music'
+                    onChange={e => search(e.target.value)} />
+                    <FiSearch className='search-icon' />
                 </div>
             </div>
-            <Player />
+            <div className="musics">
+                <h3>Registered songs</h3>
+                <div className="musics-grid">
+                    {renderMusics()}
+                </div>
+            </div>
         </Container>
     )
 }

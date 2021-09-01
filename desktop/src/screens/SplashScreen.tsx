@@ -30,7 +30,7 @@ const SplashScreen: FC = () => {
         // Verificar a conexão com a internet
 
         setTimeout(() => {
-            push('/home')
+            push('/app')
         }, 3500)
     })
 
