@@ -2,7 +2,30 @@ import React, { FC } from 'react'
 import styled from 'styled-components'
 import { FiPlay, FiX } from 'react-icons/fi'
 
-const Container = styled.div`
+type Author = {
+    id: number
+    name: string
+}
+
+type Game = {
+    id: number
+    name: string
+}
+
+type Music = {
+    id: number
+    name: string
+    url: string
+    image: string
+    author: Author
+    game: Game
+}
+
+type QueueMusicProps = {
+    music: Music
+}
+
+const Container = styled.div<{ pic: string }>`
     display: flex;
     justify-content: space-between;
     border-radius: 3px;
@@ -33,7 +56,7 @@ const Container = styled.div`
         height: 3rem;
         background-size: cover;
         background-position: center;
-        background-image: url('http://localhost:3333/files/images/sh-2.jpg');
+        background-image: url('http://localhost:3333/files/images/${props => props.pic}.jpg');
     }
 
     .music-names {
@@ -61,19 +84,18 @@ const Container = styled.div`
     }
 `
 
-const QueueMusic: FC = () => {
+const QueueMusic: FC<QueueMusicProps> = ({ music }) => {
     return (
-        <Container>
+        <Container pic={music.image}>
             <div className="music-info">
                 <FiPlay className='play-icon' />
                 <div className="pic"></div>
                 <div className="music-names">
-                    <h5>Promise</h5>
-                    <p>Akira Yamaoka</p>
+                    <h5>{music.name}</h5>
+                    <p>{music.author.name}</p>
                 </div>
             </div>
             <div className="music-options">
-                <h5>2:25</h5>
                 <FiX className='remove-icon' />
             </div>
         </Container>

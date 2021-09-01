@@ -55,7 +55,7 @@ const Queue: FC = () => {
             return <div className='no-music-playing'>No musics in queue</div>
         }
         return queue.map(music => {
-            return <QueueMusic />
+            return <QueueMusic music={music} />
         })
     }
 
@@ -67,7 +67,7 @@ const Queue: FC = () => {
             <div className="playing-now">
                 <h3>Playing now</h3>
                 {playing ? (
-                    <QueueMusic />
+                    <QueueMusic music={playing} />
                 ) : (
                     <div className='no-music-playing'>No music playing</div>
                 )}
