@@ -164,15 +164,25 @@ const Player: FC = () => {
     }, [playing])
 
     useEffect(() => {
-        playerRef.current.addEventListener('loadedmetadata', () => {
+
+        const onLoadedMetadata = () => {
             setFormatedCurrentTime(formatTime(playerRef.current?.currentTime))
             setFormatedDuration(formatTime(playerRef.current?.duration))
-        })
+        }
 
-        playerRef.current.addEventListener('timeupdate', () => {
+        const onTimeUpdate = () => {
             setCurrentProgress(playerRef.current?.currentTime * 100 / playerRef.current?.duration)
             setFormatedCurrentTime(formatTime(playerRef.current?.currentTime))
-        })
+        }
+
+        playerRef.current.addEventListener('loadedmetadata', onLoadedMetadata)
+        playerRef.current.addEventListener('timeupdate', onTimeUpdate)
+
+        return () => {
+            playerRef.current.removeEventListener('loadedmetadata', onLoadedMetadata)
+            playerRef.current.removeEventListener('timeupdate', onTimeUpdate)
+        }
+
     }, [])
 
     const togglePlay = () => {
