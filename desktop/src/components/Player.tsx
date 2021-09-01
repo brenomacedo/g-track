@@ -21,10 +21,11 @@ const Container = styled.div`
     .current-music {
         display: flex;
         flex-direction: column;
-
+        width: 120px;
     }
 
     .current-music h3 {
+        white-space: nowrap;
         color: white;
         font-family: 'OpenSans';
         font-size: 0.8rem;
@@ -34,6 +35,7 @@ const Container = styled.div`
         color: #ccc;
         font-family: 'OpenSans';
         font-size: 0.7rem;
+        white-space: nowrap;
     }
 
     .player {
@@ -59,6 +61,8 @@ const Container = styled.div`
         color: white;
         font-family: 'OpenSans';
         font-size: 0.7rem;
+
+        user-select: none;
     }
 
     .option-1 {
@@ -157,6 +161,8 @@ const Player: FC = () => {
     const [formatedCurrentTime, setFormatedCurrentTime] = useState('0:00')
     const [formatedDuration, setFormatedDuration] = useState('0:00')
 
+    const [currentVolume, setCurrentVolume] = useState(100)
+
     const playerRef = useRef<HTMLAudioElement>(null)
 
     useEffect(() => {
@@ -185,6 +191,13 @@ const Player: FC = () => {
 
     }, [])
 
+    const changeVolume = (e: number) => {
+        if(playerRef.current.volume || playerRef.current.volume === 0) {
+            playerRef.current.volume = e / 100
+        }
+        setCurrentVolume(e)
+    }
+
     const togglePlay = () => {
         setIsPlaying(!isPlaying)
 
@@ -205,8 +218,8 @@ const Player: FC = () => {
     return (
         <Container>
             <div className="current-music">
-                <h3>Promise</h3>
-                <p>Akira Yamaoka</p>
+                <h3>{playing?.name}</h3>
+                <p>{playing?.author.name}</p>
             </div>
             <div className="player">
                 <div className="player-controls">
@@ -241,7 +254,8 @@ const Player: FC = () => {
             </div>
             <div className="audio">
                 <FiVolume2 className='microphone' />
-                <AudioSlider />
+                <AudioSlider onChange={changeVolume}
+                    min={0} max={100} value={currentVolume} />
             </div>
         </Container>
     )
