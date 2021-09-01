@@ -29,6 +29,7 @@ type PlayerContextProps = {
     addToQueue: (music: Music) => void
     playNow: (music: Music) => void
     removeCurrentMusic: () => void
+    removeMusic: (qindex: number) => void
 }
 
 const PlayerContext = createContext<PlayerContextProps>({} as never)
@@ -86,7 +87,7 @@ const PlayerProvider: FC = ({ children }) => {
 
     return (
         <PlayerContext.Provider value={{
-            musics, playing, selectMusic, search, addToQueue, playNow, removeCurrentMusic, queue
+            musics, playing, selectMusic, search, addToQueue, playNow, removeCurrentMusic, queue, removeMusic
         }}>
             {children}
         </PlayerContext.Provider>

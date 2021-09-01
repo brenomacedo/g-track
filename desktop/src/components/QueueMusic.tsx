@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 import { FiPlay, FiX } from 'react-icons/fi'
+import usePlayer from '../hooks/usePlayer'
 
 type Author = {
     id: number
@@ -23,6 +24,7 @@ type Music = {
 
 type QueueMusicProps = {
     music: Music
+    qindex?: number
 }
 
 const Container = styled.div<{ pic: string }>`
@@ -84,11 +86,21 @@ const Container = styled.div<{ pic: string }>`
     }
 `
 
-const QueueMusic: FC<QueueMusicProps> = ({ music }) => {
+const QueueMusic: FC<QueueMusicProps> = ({ music, qindex }) => {
+
+    const { removeMusic, removeCurrentMusic, playNow } = usePlayer()
+
+    const handlePlay = () => {
+        if(qindex || qindex === 0) {
+            playNow(music)
+            removeMusic(qindex)
+        }
+    }
+
     return (
         <Container pic={music.image}>
             <div className="music-info">
-                <FiPlay className='play-icon' />
+                <FiPlay className='play-icon' onClick={handlePlay} />
                 <div className="pic"></div>
                 <div className="music-names">
                     <h5>{music.name}</h5>
@@ -96,7 +108,8 @@ const QueueMusic: FC<QueueMusicProps> = ({ music }) => {
                 </div>
             </div>
             <div className="music-options">
-                <FiX className='remove-icon' />
+                <FiX className='remove-icon'
+                    onClick={(qindex || qindex === 0) ? () => removeMusic(qindex) : removeCurrentMusic} />
             </div>
         </Container>
     )

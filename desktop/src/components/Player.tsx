@@ -66,8 +66,8 @@ const Container = styled.div`
     }
 
     .option-1 {
-        color: white;
         font-size: 0.8rem;
+        color: white;
     }
 
     .option-2 {
@@ -154,16 +154,44 @@ const AudioSlider = styled(PlayerSlider)`
 
 const Player: FC = () => {
 
-    const { playing } = usePlayer()
+    const { playing, removeCurrentMusic } = usePlayer()
 
     const [isPlaying, setIsPlaying] = useState(true)
     const [currentProgress, setCurrentProgress] = useState(0)
     const [formatedCurrentTime, setFormatedCurrentTime] = useState('0:00')
     const [formatedDuration, setFormatedDuration] = useState('0:00')
-
     const [currentVolume, setCurrentVolume] = useState(100)
+    const [isRepeating, setIsRepeating] = useState(false)
 
     const playerRef = useRef<HTMLAudioElement>(null)
+
+    const changeVolume = (e: number) => {
+        if(playerRef.current.volume || playerRef.current.volume === 0) {
+            playerRef.current.volume = e / 100
+        }
+        setCurrentVolume(e)
+    }
+
+    const togglePlay = () => {
+        setIsPlaying(!isPlaying)
+
+        if(isPlaying) {
+            playerRef.current?.pause()
+            return
+        }
+
+        playerRef?.current.play()
+    }
+
+    const changeValue = (e: number) => {
+        if(playerRef.current.duration) {
+            playerRef.current.currentTime = playerRef.current?.duration * e /100
+        }
+    }
+
+    const toggleRepeat = () => {
+        setIsRepeating(!isRepeating)
+    }
 
     useEffect(() => {
         setIsPlaying(true)
@@ -191,29 +219,26 @@ const Player: FC = () => {
 
     }, [])
 
-    const changeVolume = (e: number) => {
-        if(playerRef.current.volume || playerRef.current.volume === 0) {
-            playerRef.current.volume = e / 100
-        }
-        setCurrentVolume(e)
-    }
+    useEffect(() => {
 
-    const togglePlay = () => {
-        setIsPlaying(!isPlaying)
+        const onEnded = () => {
 
-        if(isPlaying) {
-            playerRef.current?.pause()
-            return
+            if(!isRepeating) {
+                removeCurrentMusic()
+                return
+            }
+
+            playerRef.current.currentTime = 0
+            playerRef.current.play()
         }
 
-        playerRef?.current.play()
-    }
+        playerRef.current.addEventListener('ended', onEnded)
 
-    const changeValue = (e: number) => {
-        if(playerRef.current.duration) {
-            playerRef.current.currentTime = playerRef.current?.duration * e /100
+        return () => {
+            playerRef.current.removeEventListener('ended', onEnded)
         }
-    }
+
+    }, [isRepeating])
 
     return (
         <Container>
@@ -240,14 +265,15 @@ const Player: FC = () => {
                         <FaStepForward />
                     </div>
                     <div className="option-1">
-                        <FiRepeat />
+                        <FiRepeat onClick={toggleRepeat}
+                            color={isRepeating ? '#346aff' : 'white'} />
                     </div>
                 </div>
                 <div className="player-track">
                     <p>{formatedCurrentTime}</p>
                     <PlayerSlider value={currentProgress} onChange={changeValue}
                         thumbClassName='thumb' trackClassName='track' min={0} max={100} />
-                    <p>{formatedDuration}</p>
+                    <p>{playing ? formatedDuration : '0:00'}</p>
                 </div>
                 <audio autoPlay
                     ref={playerRef} src={`http://localhost:3333/files/audios/${playing?.url}.mp3`} />

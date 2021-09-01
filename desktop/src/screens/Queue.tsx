@@ -54,8 +54,8 @@ const Queue: FC = () => {
         if(queue.length === 0) {
             return <div className='no-music-playing'>No musics in queue</div>
         }
-        return queue.map(music => {
-            return <QueueMusic music={music} />
+        return queue.map((music, index) => {
+            return <QueueMusic music={music} qindex={index} />
         })
     }
 
