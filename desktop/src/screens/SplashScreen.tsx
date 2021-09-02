@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Lottie from 'react-lottie'
 import * as animationData from '../animations/loading.json'
 import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 
 const Contaienr = styled.div`
     min-height: 100vh;
@@ -26,12 +27,11 @@ const SplashScreen: FC = () => {
     const { push } = useHistory()
 
     useEffect(() => {
-        // Verificar uma futura autenticação do usuário
-        // Verificar a conexão com a internet
-
-        setTimeout(() => {
-            push('/app')
-        }, 3500)
+        axios.get('http://api.github.com').then(() => {
+            push('app')
+        }).catch(() => {
+            push('error')
+        })
     })
 
     return (

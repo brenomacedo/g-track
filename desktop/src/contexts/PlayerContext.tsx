@@ -1,4 +1,5 @@
 import React, { FC , createContext, useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
 import api from '../api'
 
 type Author = {
@@ -66,6 +67,8 @@ const PlayerProvider: FC = ({ children }) => {
         setQueue(
             queue.filter((_, index) => index !== qindex)
         )
+
+        toast.success('Music removed from queue')
     }
 
     const removeCurrentMusic = () => {
@@ -98,7 +101,9 @@ const PlayerProvider: FC = ({ children }) => {
             array[randomIndex], array[currentIndex]]
         }
 
+
         setQueue([...array])
+        toast.success('Queue shuffle')
     }
 
     const addToHistory = (music: Music) => {
