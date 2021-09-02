@@ -48,11 +48,11 @@
 <h2 align="center">Some screenshots:</h2>
 <br>
 <p align='center'>
-    <img style="width: 80%;" src="https://i.imgur.com/m33lMWi.jpg">
+    <img src="https://i.imgur.com/m33lMWi.jpg">
 </p>
 <p align='center'>
-    <img style="width: 80%;" src="https://i.imgur.com/WVo5Wrj.jpg">
+    <img src="https://i.imgur.com/WVo5Wrj.jpg">
 </p>
 <p align='center'>
-    <img style="width: 80%;" src="https://i.imgur.com/UNjlPNE.jpg">
+    <img src="https://i.imgur.com/UNjlPNE.jpg">
 </p>
