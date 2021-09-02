@@ -103,7 +103,7 @@ const PlayerProvider: FC = ({ children }) => {
 
 
         setQueue([...array])
-        toast.success('Queue shuffle')
+        toast.success('Queue shuffled')
     }
 
     const addToHistory = (music: Music) => {
