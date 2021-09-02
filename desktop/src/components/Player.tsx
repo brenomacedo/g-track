@@ -154,7 +154,7 @@ const AudioSlider = styled(PlayerSlider)`
 
 const Player: FC = () => {
 
-    const { playing, removeCurrentMusic } = usePlayer()
+    const { playing, removeCurrentMusic, shuffle } = usePlayer()
 
     const [isPlaying, setIsPlaying] = useState(true)
     const [currentProgress, setCurrentProgress] = useState(0)
@@ -249,7 +249,7 @@ const Player: FC = () => {
             <div className="player">
                 <div className="player-controls">
                     <div className="option-1">
-                        <FiShuffle />
+                        <FiShuffle onClick={shuffle} />
                     </div>
                     <div className="option-2">
                         <FaStepBackward />
