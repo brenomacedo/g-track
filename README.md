@@ -47,10 +47,12 @@
 
 <h2 align="center">Some screenshots:</h2>
 <br>
-<div style="display: flex; align-items: center; flex-direction: column;">
-    <img style="width: 80%;" src="https://i.imgur.com/m33lMWi.jpg">
-    <br>
-    <img style="width: 80%;" src="https://i.imgur.com/WVo5Wrj.jpg">
-    <br>
-    <img style="width: 80%;" src="https://i.imgur.com/UNjlPNE.jpg">
-</div>
+<p align='center'>
+    <img style='width: 80%;' src="https://i.imgur.com/m33lMWi.jpg">
+</p>
+<p align='center'>
+    <img style='width: 80%;' src="https://i.imgur.com/WVo5Wrj.jpg">
+</p>
+<p align='center'>
+    <img style='width: 80%;' src="https://i.imgur.com/UNjlPNE.jpg">
+</p>
