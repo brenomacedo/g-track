@@ -86,9 +86,9 @@ const SideBar: FC<SideBarProps> = ({ selected, navigate }) => {
         <Container background={playing?.image}>
             <div className='options'>
                 <div onClick={goToHome}
-                    className={`option ${selected === 'home' && 'selected'}`}>Início</div>
+                    className={`option ${selected === 'home' && 'selected'}`}>Home</div>
                 <div onClick={goToQueue}
-                    className={`option ${selected === 'queue' && 'selected'}`}>Fila</div>
+                    className={`option ${selected === 'queue' && 'selected'}`}>Queue</div>
             </div>
             <div className="playing">
                 <p>Playing now</p>
