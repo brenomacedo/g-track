@@ -154,7 +154,7 @@ const AudioSlider = styled(PlayerSlider)`
 
 const Player: FC = () => {
 
-    const { playing, removeCurrentMusic, shuffle } = usePlayer()
+    const { playing, removeCurrentMusic, shuffle, goBack, goNext, queue } = usePlayer()
 
     const [isPlaying, setIsPlaying] = useState(true)
     const [currentProgress, setCurrentProgress] = useState(0)
@@ -238,7 +238,7 @@ const Player: FC = () => {
             playerRef.current.removeEventListener('ended', onEnded)
         }
 
-    }, [isRepeating])
+    }, [isRepeating, queue])
 
     return (
         <Container>
@@ -252,7 +252,7 @@ const Player: FC = () => {
                         <FiShuffle onClick={shuffle} />
                     </div>
                     <div className="option-2">
-                        <FaStepBackward />
+                        <FaStepBackward onClick={goBack} />
                     </div>
                     <div className="pause" onClick={togglePlay}>
                         {isPlaying ? (
@@ -262,7 +262,7 @@ const Player: FC = () => {
                         )}
                     </div>
                     <div className="option-2">
-                        <FaStepForward />
+                        <FaStepForward onClick={goNext} />
                     </div>
                     <div className="option-1">
                         <FiRepeat onClick={toggleRepeat}

@@ -31,6 +31,8 @@ type PlayerContextProps = {
     removeCurrentMusic: () => void
     removeMusic: (qindex: number) => void
     shuffle: () => void
+    goBack: () => void
+    goNext: () => void
 }
 
 const PlayerContext = createContext<PlayerContextProps>({} as never)
@@ -40,12 +42,7 @@ const PlayerProvider: FC = ({ children }) => {
     const [musics, setMusics] = useState<Music[]>([])
     const [playing, setPlaying] = useState<Music>()
     const [queue, setQueue] = useState<Music[]>([])
-
-    useEffect(() => {
-        api.get<Music[]>('/musics', { params: { search: '' } }).then(({ data }) => {
-            setMusics(data)
-        })
-    }, [])
+    const [history, setHistory] = useState<Music[]>([])
 
     const addToQueue = (music: Music) => {
         if(!playing) {
@@ -57,6 +54,7 @@ const PlayerProvider: FC = ({ children }) => {
     }
 
     const playNow = (music: Music) => {
+        addToHistory(playing)
         setPlaying(music)
     }
 
@@ -72,6 +70,7 @@ const PlayerProvider: FC = ({ children }) => {
 
     const removeCurrentMusic = () => {
         if(queue[0]) {
+            addToHistory(playing)
             setPlaying(queue[0])
             removeMusic(0)
             return
@@ -102,9 +101,41 @@ const PlayerProvider: FC = ({ children }) => {
         setQueue([...array])
     }
 
+    const addToHistory = (music: Music) => {
+        setHistory([music, ...history])
+    }
+
+    const goBack = () => {
+        if(!history[0]) {
+            return
+        }
+
+        setQueue([playing, ...queue])
+        setPlaying(history[0])
+        setHistory(
+            history.filter((music, index) => index !== 0)
+        )
+    }
+
+    const goNext = () => {
+        if(!queue[0]) {
+            return
+        }
+
+        removeCurrentMusic()
+    }
+
+    useEffect(() => {
+        api.get<Music[]>('/musics', { params: { search: '' } }).then(({ data }) => {
+            setMusics(data)
+        })
+    }, [])
+
     return (
         <PlayerContext.Provider value={{
-            musics, playing, selectMusic, search, addToQueue, playNow, removeCurrentMusic, queue, removeMusic, shuffle
+            musics, playing, selectMusic, search, addToQueue,
+            playNow, removeCurrentMusic, queue, removeMusic,
+            shuffle, goBack, goNext
         }}>
             {children}
         </PlayerContext.Provider>
