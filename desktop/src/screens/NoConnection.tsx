@@ -1,4 +1,4 @@
-import React, { FC , useState, useEffect } from 'react'
+import React, { FC , useState } from 'react'
 import { FiWifiOff } from 'react-icons/fi'
 import styled from 'styled-components'
 import axios from 'axios'
@@ -66,10 +66,6 @@ const NoConnection: FC = () => {
     const quit = () => {
         window.api.send('close')
     }
-
-    useEffect(() => {
-        tryAgain()
-    }, [])
 
     return (
         <Container>

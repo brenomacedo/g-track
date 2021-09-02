@@ -7,7 +7,7 @@ import SplashScreen from './screens/SplashScreen'
 const Routes: FC = () => {
     return (
         <HashRouter>
-            <Route path='/' component={NoConnection} exact />
+            <Route path='/' component={SplashScreen} exact />
             <Route path='/app' component={App} />
             <Route path='/error' component={NoConnection} />
         </HashRouter>
