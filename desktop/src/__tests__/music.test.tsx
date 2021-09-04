@@ -10,7 +10,7 @@ import faker from 'faker'
 // [x] - on clicking in the Close button, the menu should close
 
 
-describe('should test the music component', () => {
+describe('testing the music component', () => {
 
     it('should render the music component', () => {
 
@@ -43,7 +43,7 @@ describe('should test the music component', () => {
 
     })
 
-    it('on clicking in the component, the menu should appear', () => {
+    it('on clicking in the component, the menu should appear and on clicking the close button in the menu, it closes itself', () => {
 
         const music = {
             id: faker.datatype.number(),

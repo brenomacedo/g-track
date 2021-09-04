@@ -83,11 +83,11 @@ const SideBar: FC<SideBarProps> = ({ selected, navigate }) => {
     }
 
     return (
-        <Container background={playing?.image}>
+        <Container background={playing?.image} role='sidebar'>
             <div className='options'>
-                <div onClick={goToHome}
+                <div onClick={goToHome} role='home-button'
                     className={`option ${selected === 'home' && 'selected'}`}>Home</div>
-                <div onClick={goToQueue}
+                <div onClick={goToQueue} role='queue-button'
                     className={`option ${selected === 'queue' && 'selected'}`}>Queue</div>
             </div>
             <div className="playing">
