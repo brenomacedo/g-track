@@ -60,7 +60,7 @@ const Queue: FC = () => {
     }
 
     return (
-        <Container>
+        <Container role='queue-screen'>
             <div className="top-bar">
                 <h2>Current queue</h2>
             </div>

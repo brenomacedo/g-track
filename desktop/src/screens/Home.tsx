@@ -71,7 +71,7 @@ const Home: FC = () => {
     }
 
     return (
-        <Container>
+        <Container role='home-screen'>
             <div className="top-bar">
                 <div className="search">
                     <input type="text" className="search-input" placeholder='Search a music'
