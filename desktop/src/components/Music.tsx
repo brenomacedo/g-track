@@ -185,13 +185,13 @@ const Music: FC<MusicProps> = ({ music }) => {
     }
 
     return (
-        <Container background={music.image} open={showMenu} onClick={openMenu}>
-            <div className="menu">
+        <Container background={music.image} open={showMenu} onClick={openMenu} role='container'>
+            <div className="menu" role='menu'>
                 <div className="menu-options">
                     <div className="menu-option" onClick={handlePlayNow}>Play now</div>
                     <div className="menu-option" onClick={handleAddToQueue}>Add to queue</div>
                 </div>
-                <div className="close-button" onClick={closeMenu}>
+                <div className="close-button" onClick={closeMenu} role='close-button'>
                     <FiX className='close-icon' />
                 </div>
             </div>

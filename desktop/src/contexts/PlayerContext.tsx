@@ -133,7 +133,7 @@ const PlayerProvider: FC = ({ children }) => {
     useEffect(() => {
         api.get<Music[]>('/musics', { params: { search: '' } }).then(({ data }) => {
             setMusics(data)
-        })
+        }).catch(() => { return })
     }, [])
 
     return (
